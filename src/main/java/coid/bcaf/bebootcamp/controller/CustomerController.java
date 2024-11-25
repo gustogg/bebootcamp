@@ -107,7 +107,7 @@ public class CustomerController {
             customer.setTglRetensi(customerDetails.getTglRetensi());
             customer.setFcPengurus(customerDetails.getFcPengurus());
             customer.setNoMap(customerDetails.getNoMap());
-
+            customer.setSampled(customerDetails.getSampled());
 
 
             Customer updatedCustomer = customerRepository.save(customer);

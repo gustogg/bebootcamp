@@ -23,6 +23,12 @@ public class ListBoxService {
         return listBoxRepository.findById(id);
     }
 
+    public void updateSampledByNoBox(String noBox, String sampled) {
+        listBoxRepository.updateSampledByNoBox(noBox, sampled);
+    }
+
+
+
     public ListBox saveListBox(ListBox listBox) {
         return listBoxRepository.save(listBox);
     }

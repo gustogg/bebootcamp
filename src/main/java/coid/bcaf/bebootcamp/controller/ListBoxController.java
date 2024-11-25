@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -55,6 +57,22 @@ public class ListBoxController {
         listBoxService.deleteListBox(id);
         return ResponseEntity.noContent().build();
     }
+    @PutMapping("/update-sampled")
+    public ResponseEntity<Map<String, String>> updateSampledByNoBox(
+            @RequestParam String noBox, @RequestParam String sampled) {
+        listBoxService.updateSampledByNoBox(noBox, sampled);
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "ListBox sampled column updated successfully.");
+        response.put("noBox", noBox);
+        response.put("sampled", sampled);
+        return ResponseEntity.ok(response);
+    }
+
+
+
+
+
+
 }
 
 

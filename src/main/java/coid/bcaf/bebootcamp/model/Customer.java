@@ -30,6 +30,8 @@ public class Customer {
     private String noBox;
     private String fcPengurus;
     private String noMap;
+    private String sampled;
+
 
     @Temporal(TemporalType.DATE)
     private Date tglRealisasi;
@@ -223,6 +225,14 @@ public class Customer {
 
     public void setNoMap(String noMap) {
         this.noMap = noMap;
+    }
+
+    public String getSampled() {
+        return sampled;
+    }
+
+    public void setSampled(String sample) {
+        this.sampled = sample;
     }
 
 

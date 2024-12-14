@@ -43,7 +43,7 @@ public class SecurityConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/api/**")
-                        .allowedOrigins("http://localhost:4200", "https://1d50-114-79-7-110.ngrok-free.app", "http://10.0.2.2:4200") // Add ngrok URL here for Android WebView and localhost
+                        .allowedOrigins("http://localhost:4200", "https://a128-103-165-222-114.ngrok-free.app", "http://10.0.2.2:4200", "http://10.10.13.37:4200", "http://192.168.50.107:4200", "http://10.10.13.42") // Add ngrok URL here for Android WebView and localhost
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);

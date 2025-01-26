@@ -4,6 +4,7 @@ package coid.bcaf.bebootcamp.controller;
 
 import coid.bcaf.bebootcamp.model.ListBox;
 import coid.bcaf.bebootcamp.service.ListBoxService;
+import jakarta.persistence.Column;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import java.util.Optional;
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("/api/listbox")
+
 public class ListBoxController {
 
     @Autowired
@@ -43,7 +45,7 @@ public class ListBoxController {
         return listBoxService.getListBoxById(id)
                 .map(existingListBox -> {
                     existingListBox.setno_box(listBox.getno_box());
-                    existingListBox.setcreated_date(listBox.getcreated_date());
+//                    existingListBox.setCreatedDate(listBox.getcreated_date());
                     existingListBox.setapproved(listBox.getapproved());
                     existingListBox.setsampled(listBox.getsampled());
                     ListBox updatedListBox = listBoxService.saveListBox(existingListBox);
@@ -59,14 +61,21 @@ public class ListBoxController {
     }
     @PutMapping("/update-sampled")
     public ResponseEntity<Map<String, String>> updateSampledByNoBox(
-            @RequestParam String noBox, @RequestParam String sampled) {
-        listBoxService.updateSampledByNoBox(noBox, sampled);
+            @RequestParam String noBox, @RequestParam String sampled, @RequestParam String approved) {
+        listBoxService.updateSampledByNoBox(noBox, sampled, approved);
         Map<String, String> response = new HashMap<>();
         response.put("message", "ListBox sampled column updated successfully.");
         response.put("noBox", noBox);
         response.put("sampled", sampled);
+        response.put("approved", approved);
         return ResponseEntity.ok(response);
     }
+    @GetMapping("/unapproved")
+    public List<ListBox> getUnapprovedListBoxes() {
+        return listBoxService.getUnapprovedListBoxes();
+    }
+
+
 
 
 

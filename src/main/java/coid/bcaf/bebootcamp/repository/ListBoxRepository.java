@@ -1,7 +1,4 @@
 package coid.bcaf.bebootcamp.repository;
-
-
-
 import coid.bcaf.bebootcamp.model.Customer;
 import coid.bcaf.bebootcamp.model.ListBox;
 import jakarta.transaction.Transactional;
@@ -19,8 +16,10 @@ public interface ListBoxRepository extends JpaRepository<ListBox, Long> {
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE db_user.list_box SET sampled = :sampled WHERE no_box = :noBox", nativeQuery = true)
-    void updateSampledByNoBox(@Param("noBox") String noBox, @Param("sampled") String sampled);
+    @Query(value = "UPDATE db_user.list_box SET sampled = :sampled, approved = :approved WHERE no_box = :noBox", nativeQuery = true)
+    void updateSampledByNoBox(@Param("noBox") String noBox, @Param("sampled") String sampled,  @Param("approved") String approved);
 
+    @Query(value = "SELECT * FROM db_user.list_box WHERE sampled = 1 AND approved = 0", nativeQuery = true)
+    List<ListBox> findUnapprovedListBoxes();
 
 }

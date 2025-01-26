@@ -23,8 +23,8 @@ public class ListBoxService {
         return listBoxRepository.findById(id);
     }
 
-    public void updateSampledByNoBox(String noBox, String sampled) {
-        listBoxRepository.updateSampledByNoBox(noBox, sampled);
+    public void updateSampledByNoBox(String noBox, String sampled, String approved) {
+        listBoxRepository.updateSampledByNoBox(noBox, sampled, approved);
     }
 
 
@@ -36,4 +36,8 @@ public class ListBoxService {
     public void deleteListBox(Long id) {
         listBoxRepository.deleteById(id);
     }
+    public List<ListBox> getUnapprovedListBoxes() {
+        return listBoxRepository.findUnapprovedListBoxes();
+    }
+
 }

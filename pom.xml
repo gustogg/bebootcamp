@@ -82,6 +82,13 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
+		<dependency>
+			<groupId>io.jsonwebtoken</groupId>
+			<artifactId>jjwt</artifactId>
+			<version>0.12.5</version>
+		</dependency>
+
 		<!-- Spring Security Config (Let Spring Boot manage the version) -->
 		<!-- Removed version to use the Spring Boot's default version -->
 		<dependency>

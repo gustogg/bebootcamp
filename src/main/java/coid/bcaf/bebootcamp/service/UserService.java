@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
+
 @Service
 public class UserService {
 
@@ -16,19 +18,29 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public User registerUser(User user) {
-        // Hash the password
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
+    // Create a new user (registration)
+    public User createUser(String username, String rawPassword, String role) {
+        if (userRepository.existsById(username)) {
+            throw new RuntimeException("Username already exists");
+        }
+        User user = new User();
+        user.setUsername(username);
+        // Hash the password before storing it
+        user.setPassword(passwordEncoder.encode(rawPassword));
+        user.setRole(role);
+        user.setCreatedDate(LocalDateTime.now());
         return userRepository.save(user);
     }
 
-    public boolean loginUser(String username, String rawPassword) {
-        User user = userRepository.findByUsername(username);
-
-        if (user != null) {
-            // Compare raw password with hashed password
-            return passwordEncoder.matches(rawPassword, user.getPassword());
+    // Login function that checks credentials
+    public User login(String username, String rawPassword) {
+        User user = userRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+        // Verify the password
+        if (passwordEncoder.matches(rawPassword, user.getPassword())) {
+            return user;
+        } else {
+            throw new RuntimeException("Invalid credentials");
         }
-        return false;
     }
 }

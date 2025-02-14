@@ -4,27 +4,35 @@ package coid.bcaf.bebootcamp.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "Users") // Changed table name
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    @Column(length = 50)
     private String username;
-    private String password; // Store hashed password here
+
+    private String password;
+
     private String role;
 
-    // Getters and Setters
-    public Long getId() {
-        return id;
+    @Column(name = "created_date")
+    private LocalDateTime createdDate;
+
+    // Constructors
+    public User() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public User(String username, String password, String role, LocalDateTime createdDate) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.createdDate = createdDate;
     }
 
+    // Getters and setters
     public String getUsername() {
         return username;
     }
@@ -47,6 +55,14 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public LocalDateTime getCreatedDate() {
+        return createdDate;
+    }
+
+    public void setCreatedDate(LocalDateTime createdDate) {
+        this.createdDate = createdDate;
     }
 }
 

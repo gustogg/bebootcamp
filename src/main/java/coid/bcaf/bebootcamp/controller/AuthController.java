@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import io.jsonwebtoken.Jwts;
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 import coid.bcaf.bebootcamp.security.JwtUtil;
 
@@ -39,6 +40,24 @@ public class AuthController {
         String token = jwtUtil.generateToken(user.getUsername()); // Generate the token
         return ResponseEntity.ok(Collections.singletonMap("token", token));
     }
+
+    @GetMapping("/user/{username}")
+    public ResponseEntity<User> getUsername(@PathVariable String username) {
+        User user = userService.getUserByUsername(username);
+        if (user != null) {
+            return ResponseEntity.ok(user);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+
+    @GetMapping("/users")
+    public ResponseEntity<List<User>> getAllUsers() {
+        List<User> users = userService.getAllUsers();
+        return ResponseEntity.ok(users);
+    }
+
 }
 
 // DTO for registration request

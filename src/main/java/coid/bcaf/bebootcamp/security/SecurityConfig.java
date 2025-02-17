@@ -21,7 +21,7 @@ public class SecurityConfig {
         http.csrf().disable() // Disable CSRF protection for simplicity
                 .authorizeRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("/api/auth/register", "/api/auth/login").permitAll() // Allow register/login to be public
+                                .requestMatchers("/api/auth/register", "/api/auth/login", "api/auth/user/{id}","api/auth/user/{username}").permitAll() // Allow register/login to be public
                                 .requestMatchers("/api/listbox/**", "/api/customers/**").permitAll() // Allow public access to these APIs
                                 .anyRequest().authenticated() // All other requests require authentication
                 )
